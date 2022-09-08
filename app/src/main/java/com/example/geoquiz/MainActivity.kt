@@ -10,7 +10,6 @@ import com.example.geoquiz.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-
     private val questionBank = listOf(
         Question(R.string.question_australia,true),
         Question(R.string.question_oceans,true),
@@ -44,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
+
             val questionTextResId = questionBank[currentIndex].textResId
             binding.questionTextView.setText(questionTextResId)
         }

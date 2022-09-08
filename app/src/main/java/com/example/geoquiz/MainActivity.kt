@@ -11,13 +11,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val questionBank = listOf(
-        Question(R.string.question_australia, true),
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_mideast, false),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true)
-    )
+        Question(R.string.question_australia,true),
+        Question(R.string.question_oceans,true),
+        Question(R.string.question_mideast,false),
+        Question(R.string.question_africa,false),
+        Question(R.string.question_americas,true),
+        Question(R.string.question_asia, true))
 
     private var currentIndex = 0
 
@@ -44,14 +43,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
-            updateQuestion()
+
+            val questionTextResId = questionBank[currentIndex].textResId
+            binding.questionTextView.setText(questionTextResId)
         }
 
-        updateQuestion()
-
-    }
-
-    private fun updateQuestion(){
         val questionTextResId = questionBank[currentIndex].textResId
         binding.questionTextView.setText(questionTextResId)
     }

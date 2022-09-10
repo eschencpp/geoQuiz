@@ -3,11 +3,28 @@ package com.example.geoquiz
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
-private const val TAG = "QuizViewModel"
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 
 class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel(){
+    @Test
+    fun providesExpectedQuestionText(){
+        val savedStateHandle = SavedStateHandle()
+        val quizViewModel = QuizViewModel(savedStateHandle)
+        assertEquals(R.string.question_australia, quizViewModel.currentQuestionText)
+    }
+
+    @Test
+    fun wrapsAroundQuestionBank(){
+        val savedStateHandle = SavedStateHandle(mapOf(CURRENT_INDEX_KEY to 5))
+        val quizViewModel = QuizViewModel(savedStateHandle)
+        assertEquals(R.string.question_asia, quizViewModel.currentQuestionText)
+        quizViewModel.moveToNext()
+        assertEquals(R.string.question_australia, quizViewModel.currentQuestionText)
+    }
+
     private val questionBank = listOf(
         Question(R.string.question_australia,true),
         Question(R.string.question_oceans,true),

@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/echen/AndroidStudioProjects/GeoQuiz/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/echen/AndroidStudioProjects/geoQuiz/app/src/main/res/layout/activity_main.xml" value="0.11041666666666666" />
+        <entry key="..\:/Users/echen/AndroidStudioProjects/GeoQuiz/app/src/main/res/drawable/arrow_right.xml" value="0.1" />
+        <entry key="..\:/Users/echen/AndroidStudioProjects/GeoQuiz/app/src/main/res/drawable/ic_baseline_arrow_right_24.xml" value="0.1" />
+        <entry key="..\:/Users/echen/AndroidStudioProjects/GeoQuiz/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -12,6 +12,7 @@ import org.junit.Test
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 const val IS_CHEATER_KEY = "IS_CHEATER_KEY"
 
+
 class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel(){
     @Test
     fun providesExpectedQuestionText(){
@@ -67,19 +68,19 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
         }
     }
 
+    var totalAnswered: Int = 0
+    var questionBankSize: Int = questionBank.size
+
     //Challenge 2. Once the function is called, the question will be marked as answered.
     fun setHasBeenAnswered(){
+        if(questionBank[currentIndex].hasBeenAnswered == false){
+            totalAnswered++
+        }
         questionBank[currentIndex].hasBeenAnswered = true
     }
 
+    //Get value to see if question has been answered
     val currentHasBeenAnswered: Boolean
         get() = questionBank[currentIndex].hasBeenAnswered
 
-    //Checks to see if question has already been answered.
-    fun checkMultiAnswer() : Boolean{
-        if(questionBank[currentIndex].hasBeenAnswered == true){
-            return true
-        }
-        return false
-    }
 }

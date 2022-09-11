@@ -18,4 +18,5 @@
     <string name="judgment_toast">Cheating is wrong.</string>
     <string name = "previous_button">Prev</string>
     <string name = "has_been_answered">Question has already been answered.</string>
+    <string name = "final_score">Your score is: </string>
 </resources>

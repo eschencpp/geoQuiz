@@ -7,18 +7,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import kotlin.math.round
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.geoquiz.databinding.ActivityMainBinding
+import kotlin.math.roundToInt
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var answerIsTrue = false
     private val quizViewModel : QuizViewModel by viewModels()
-
+    var answeredRight = 0
     private val cheatLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {result ->
@@ -99,6 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAnswer(userAnswer: Boolean){
 
+        //If question has been previously answered, show toast and return.
         if(quizViewModel.currentHasBeenAnswered == true){
             Toast.makeText(this, R.string.has_been_answered, Toast.LENGTH_SHORT)
                 .show()
@@ -111,8 +114,24 @@ class MainActivity : AppCompatActivity() {
             else -> R.string.incorrect_toast
         }
 
+        //Increment score if  answer is right
+        if(userAnswer == correctAnswer){
+            ++answeredRight
+        }
+
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+
+        gradedDisplay()
+    }
+
+    //Challenge 3 Check if all questions are answered and if so. display score
+    private fun gradedDisplay(){
+        if(quizViewModel.totalAnswered == (quizViewModel.questionBankSize - 1)){
+            val score = answeredRight.toDouble()/quizViewModel.questionBankSize
+            Toast.makeText(this,String.format("Your score is: %.2f" , score*100) + "%", Toast.LENGTH_LONG)
+                .show()
+        }
     }
 
 }

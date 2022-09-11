@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
         }
 
+        binding.previousButton.setOnClickListener {
+            quizViewModel.movetoPrev()
+            updateQuestion()
+        }
+
         binding.nextButton.setOnClickListener {
             quizViewModel.moveToNext()
 

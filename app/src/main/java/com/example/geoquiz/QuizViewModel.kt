@@ -56,4 +56,13 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
     fun moveToNext(){
         currentIndex = (currentIndex + 1) % questionBank.size
     }
+
+    fun movetoPrev() {
+        if(currentIndex == 0){
+            //If on the first question loop to the last index in the question list.
+            currentIndex = questionBank.size - 1
+        }else {
+            currentIndex = (currentIndex - 1) % questionBank.size
+        }
+    }
 }

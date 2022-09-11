@@ -30,17 +30,18 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
     }
 
     private val questionBank = listOf(
-        Question(R.string.question_australia,true),
-        Question(R.string.question_oceans,true),
-        Question(R.string.question_mideast,false),
-        Question(R.string.question_africa,false),
-        Question(R.string.question_americas,true),
-        Question(R.string.question_asia, true)
+        Question(R.string.question_australia,true,false),
+        Question(R.string.question_oceans,true,false),
+        Question(R.string.question_mideast,false,false),
+        Question(R.string.question_africa,false,false),
+        Question(R.string.question_americas,true,false),
+        Question(R.string.question_asia, true,false)
     )
 
     var isCheater: Boolean
         get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false
         set(value) = savedStateHandle.set(IS_CHEATER_KEY, value)
+
 
     private var currentIndex: Int
         get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: 0
@@ -64,5 +65,21 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
         }else {
             currentIndex = (currentIndex - 1) % questionBank.size
         }
+    }
+
+    //Challenge 2. Once the function is called, the question will be marked as answered.
+    fun setHasBeenAnswered(){
+        questionBank[currentIndex].hasBeenAnswered = true
+    }
+
+    val currentHasBeenAnswered: Boolean
+        get() = questionBank[currentIndex].hasBeenAnswered
+
+    //Checks to see if question has already been answered.
+    fun checkMultiAnswer() : Boolean{
+        if(questionBank[currentIndex].hasBeenAnswered == true){
+            return true
+        }
+        return false
     }
 }

@@ -38,10 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.trueButton.setOnClickListener{ view: View ->
             checkAnswer(true)
+            quizViewModel.setHasBeenAnswered()
         }
 
         binding.falseButton.setOnClickListener{ view: View ->
             checkAnswer(false)
+            quizViewModel.setHasBeenAnswered()
         }
 
         binding.previousButton.setOnClickListener {
@@ -96,6 +98,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkAnswer(userAnswer: Boolean){
+
+        if(quizViewModel.currentHasBeenAnswered == true){
+            Toast.makeText(this, R.string.has_been_answered, Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
         val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId = when{
             quizViewModel.isCheater -> R.string.judgment_toast

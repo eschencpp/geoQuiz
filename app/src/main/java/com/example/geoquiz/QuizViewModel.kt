@@ -12,6 +12,7 @@ import org.junit.Test
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 const val IS_CHEATER_KEY = "IS_CHEATER_KEY"
 
+
 class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel(){
     @Test
     fun providesExpectedQuestionText(){
@@ -30,17 +31,18 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
     }
 
     private val questionBank = listOf(
-        Question(R.string.question_australia,true),
-        Question(R.string.question_oceans,true),
-        Question(R.string.question_mideast,false),
-        Question(R.string.question_africa,false),
-        Question(R.string.question_americas,true),
-        Question(R.string.question_asia, true)
+        Question(R.string.question_australia,true,false),
+        Question(R.string.question_oceans,true,false),
+        Question(R.string.question_mideast,false,false),
+        Question(R.string.question_africa,false,false),
+        Question(R.string.question_americas,true,false),
+        Question(R.string.question_asia, true,false)
     )
 
     var isCheater: Boolean
         get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false
         set(value) = savedStateHandle.set(IS_CHEATER_KEY, value)
+
 
     private var currentIndex: Int
         get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: 0
@@ -56,4 +58,40 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
     fun moveToNext(){
         currentIndex = (currentIndex + 1) % questionBank.size
     }
+
+    fun movetoPrev() {
+        if(currentIndex == 0){
+            //If on the first question loop to the last index in the question list.
+            currentIndex = questionBank.size - 1
+        }else {
+            currentIndex = (currentIndex - 1) % questionBank.size
+        }
+    }
+
+    var totalAnswered: Int = 0
+    var questionBankSize: Int = questionBank.size
+
+    //Challenge 2. Once the function is called, the question will be marked as answered.
+    fun setHasBeenAnswered(){
+        if(questionBank[currentIndex].hasBeenAnswered == false){
+            totalAnswered++
+        }
+        questionBank[currentIndex].hasBeenAnswered = true
+    }
+
+    //Get value to see if question has been answered
+    val currentHasBeenAnswered: Boolean
+        get() = questionBank[currentIndex].hasBeenAnswered
+
+
+    var answeredRight = 0
+    fun addScore(){
+        answeredRight++
+    }
+
+    fun getScore() : Int{
+        return answeredRight
+    }
+
+
 }

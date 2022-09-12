@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var answerIsTrue = false
     private val quizViewModel : QuizViewModel by viewModels()
-    var answeredRight = 0
     private val cheatLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {result ->
@@ -116,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
         //Increment score if  answer is right
         if(userAnswer == correctAnswer){
-            ++answeredRight
+            quizViewModel.addScore()
         }
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
@@ -128,7 +127,7 @@ class MainActivity : AppCompatActivity() {
     //Challenge 3 Check if all questions are answered and if so. display score
     private fun gradedDisplay(){
         if(quizViewModel.totalAnswered == (quizViewModel.questionBankSize - 1)){
-            val score = answeredRight.toDouble()/quizViewModel.questionBankSize
+            val score = quizViewModel.getScore().toDouble()/quizViewModel.questionBankSize
             Toast.makeText(this,String.format("Your score is: %.2f" , score*100) + "%", Toast.LENGTH_LONG)
                 .show()
         }

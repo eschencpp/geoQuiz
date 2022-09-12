@@ -83,4 +83,15 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
     val currentHasBeenAnswered: Boolean
         get() = questionBank[currentIndex].hasBeenAnswered
 
+
+    var answeredRight = 0
+    fun addScore(){
+        answeredRight++
+    }
+
+    fun getScore() : Int{
+        return answeredRight
+    }
+
+
 }

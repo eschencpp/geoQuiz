@@ -11,6 +11,10 @@
     <string name="question_africa">The source of the Nile River is in Egypt.</string>
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
+    <string name="question_California">Pomona is the Capital of California.</string> //False
+    <string name="question_mteverest">Mount Everest is the tallest mountain in the world.</string> // True
+    <string name="question_nileRiver">The Nile River is the second largest river in Africa.</string> //False
+    <string name="question_mexico">Mexico City is the capital of Mexico.</string> //True
     <string name="next_button">Next</string>
     <string name="warning_text">Are you sure you want to do this?</string>
     <string name="show_answer_button">Show Answer</string>

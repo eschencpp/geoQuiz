@@ -36,7 +36,11 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
         Question(R.string.question_mideast,false,false),
         Question(R.string.question_africa,false,false),
         Question(R.string.question_americas,true,false),
-        Question(R.string.question_asia, true,false)
+        Question(R.string.question_asia, true,false),
+        Question(R.string.question_California, false, false),
+        Question(R.string.question_mteverest, true, false),
+        Question(R.string.question_nileRiver, false, false),
+        Question(R.string.question_mexico, true, false),
     )
 
     var isCheater: Boolean
